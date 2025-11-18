@@ -6,249 +6,245 @@ Each entry includes: signature, purpose, dependencies, and usage locations.
 
 ## 🔧 Utility Functions
 
-### /src/shared/utils/validation.ts
+### [Path to your utility file]
 
-```typescript
-validateEmail(email: string): boolean
-// RFC 5322 compliant email validation
-// USED IN: RegisterForm, LoginForm, UserService
-// EXAMPLE: validateEmail("test@example.com") // true
+```[language]
+[functionName]([params]): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Component/Service names that use this]
+// EXAMPLE: [functionName]([example params]) // [expected result]
 
-validatePassword(password: string): { valid: boolean; errors: string[] }
-// Password strength validation
-// RULES: min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special
-// USED IN: RegisterForm, PasswordResetForm, UserService
-// EXAMPLE: validatePassword("Test123!") // { valid: true, errors: [] }
+[functionName]([params]): [ReturnType]
+// [Description of what the function does]
+// RULES: [validation rules or constraints]
+// USED IN: [Component/Service names that use this]
+// EXAMPLE: [functionName]([example params]) // [expected result]
 
-sanitizeInput(input: string, type: 'html' | 'sql' | 'filename'): string
-// Sanitizes user input based on context
-// USED IN: All user input processing
-// PREVENTS: XSS, SQL injection, path traversal
+[functionName]([params], [params]): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Where it's used]
+// PREVENTS: [Security concerns it addresses]
 ```
 
-### /src/shared/utils/formatting.ts
+### [Path to your utility file]
 
-```typescript
-formatCurrency(amount: number, currency: string = 'USD'): string
-// Formats number as currency string
-// USED IN: PriceDisplay, Invoice, OrderSummary
-// EXAMPLE: formatCurrency(1234.5, 'USD') // "$1,234.50"
+```[language]
+[functionName]([params], [optionalParams] = [default]): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Component/Service names that use this]
+// EXAMPLE: [functionName]([example params]) // [expected result]
 
-formatDate(date: Date | string, format: string = 'short'): string
-// Consistent date formatting across the app
-// FORMATS: 'short', 'long', 'iso', 'relative'
-// USED IN: All date displays
-// LOCALE: Respects user's locale settings
+[functionName]([params], [params] = '[default]'): [ReturnType]
+// [Description of what the function does]
+// FORMATS: [supported formats or options]
+// USED IN: [Where it's used]
+// LOCALE: [Localization behavior]
 
-truncateText(text: string, maxLength: number, suffix: string = '...'): string
-// Safely truncates text preserving word boundaries
-// USED IN: CardComponent, ListItems, Previews
+[functionName]([params], [params], [params] = '...'): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Component/Service names that use this]
 ```
 
-### /src/shared/utils/errors.ts
+### [Path to your utility file]
 
-```typescript
-class AppError extends Error {
-  constructor(message: string, code: string, statusCode: number)
-  // Custom error class for consistent error handling
-  // USED IN: All services and API endpoints
-  // EXAMPLE: throw new AppError('Not found', 'RESOURCE_NOT_FOUND', 404)
+```[language]
+class [ClassName] extends [BaseClass] {
+  constructor([params])
+  // [Description of the class]
+  // USED IN: [Where it's used]
+  // EXAMPLE: [usage example]
 }
 
-handleError(error: unknown): AppError
-// Converts any error to AppError format
-// USED IN: Error boundaries, catch blocks
-// LOGS: To monitoring service
+[functionName]([params]): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Where it's used]
+// LOGS: [Logging behavior]
 
-isAppError(error: unknown): error is AppError
-// Type guard for AppError
-// USED IN: Error handlers
+[functionName]([params]): [ReturnType]
+// [Description of what the function does]
+// USED IN: [Where it's used]
 ```
 
 ## 🏛️ Services
 
-### /src/backend/services/AuthService.ts
+### [Path to your service file]
 
-```typescript
-class AuthService {
-  async authenticate(email: string, password: string): Promise<AuthResult>
-  // Validates credentials and returns auth token
-  // THROWS: AppError('Invalid credentials', 'AUTH_FAILED', 401)
-  // CALLS: UserService.findByEmail(), bcrypt.compare()
-  // RETURNS: { token: string, user: User, expiresIn: number }
-  // USED BY: POST /api/auth/login
+```[language]
+class [ServiceName] {
+  async [methodName]([params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // THROWS: [Error conditions]
+  // CALLS: [Other services/methods called]
+  // RETURNS: [Return value description]
+  // USED BY: [API endpoint or component]
 
-  async validateToken(token: string): Promise<TokenPayload>
-  // Validates JWT token
-  // THROWS: AppError('Invalid token', 'TOKEN_INVALID', 401)
-  // USES: jwt.verify() with RS256
-  // CACHES: Valid tokens in Redis for 5 min
-  // USED BY: authMiddleware
+  async [methodName]([params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // THROWS: [Error conditions]
+  // USES: [Library/function used]
+  // CACHES: [Caching strategy]
+  // USED BY: [Where it's used]
 
-  async refreshToken(refreshToken: string): Promise<AuthResult>
-  // Exchanges refresh token for new access token
-  // VALIDATES: Refresh token exists in database
-  // INVALIDATES: Used refresh token
-  // USED BY: POST /api/auth/refresh
+  async [methodName]([params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // VALIDATES: [Validation rules]
+  // INVALIDATES: [What gets invalidated]
+  // USED BY: [Where it's used]
 
-  async logout(userId: string): Promise<void>
-  // Invalidates all tokens for user
-  // CLEARS: Redis cache
-  // DELETES: Refresh tokens from DB
-  // USED BY: POST /api/auth/logout
+  async [methodName]([params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // CLEARS: [What gets cleared]
+  // DELETES: [What gets deleted]
+  // USED BY: [Where it's used]
 }
 ```
 
-### /src/backend/services/UserService.ts
+### [Path to your service file]
 
-```typescript
-class UserService {
-  async findAll(options?: FindOptions): Promise<PaginatedResult<User>>
-  // Returns paginated list of users
-  // SUPPORTS: Filtering, sorting, pagination
-  // CACHE: Redis key `users:${hash(options)}` (5 min)
-  // USED BY: GET /api/users, Admin dashboard
+```[language]
+class [ServiceName] {
+  async [methodName]([params]?): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // SUPPORTS: [Features supported]
+  // CACHE: [Caching strategy]
+  // USED BY: [Where it's used]
 
-  async findById(id: string): Promise<User | null>
-  // Finds user by ID
-  // INCLUDES: Related data based on context
-  // CACHE: Redis key `user:${id}` (10 min)
-  // USED BY: Multiple endpoints
+  async [methodName]([params]): Promise<[ReturnType] | null>
+  // [Description of what the method does]
+  // INCLUDES: [What's included in response]
+  // CACHE: [Caching strategy]
+  // USED BY: [Where it's used]
 
-  async create(data: CreateUserDto): Promise<User>
-  // Creates new user account
-  // VALIDATES: Email uniqueness, password strength
-  // HASHES: Password with bcrypt (rounds: 12)
-  // SENDS: Welcome email via EmailService
-  // INVALIDATES: users:all cache
-  // USED BY: POST /api/auth/register
+  async [methodName]([params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // VALIDATES: [Validation rules]
+  // [ACTION]: [What action is performed]
+  // INVALIDATES: [What gets invalidated]
+  // USED BY: [Where it's used]
 
-  async update(id: string, data: UpdateUserDto): Promise<User>
-  // Updates user data
-  // VALIDATES: Email uniqueness if changed
-  // LOGS: Changes to audit log
-  // INVALIDATES: user:${id} and users:all cache
-  // USED BY: PATCH /api/users/:id
+  async [methodName]([params], [params]): Promise<[ReturnType]>
+  // [Description of what the method does]
+  // VALIDATES: [Validation rules]
+  // LOGS: [What gets logged]
+  // INVALIDATES: [What gets invalidated]
+  // USED BY: [Where it's used]
 }
 ```
 
-## 🪝 React Hooks
+## 🪝 [Framework] Hooks / Custom Hooks
 
-### /src/frontend/hooks/useAuth.ts
+### [Path to your hook file]
 
-```typescript
-useAuth(): AuthContext
-// Provides authentication state and methods
-// USES: AuthContext via useContext
+```[language]
+[hookName](): [ReturnType]
+// [Description of what the hook provides]
+// USES: [Context/Library] via [method]
 // RETURNS: {
-//   user: User | null,
-//   isAuthenticated: boolean,
-//   isLoading: boolean,
-//   login: (email, password) => Promise<void>,
-//   logout: () => Promise<void>,
-//   refreshToken: () => Promise<void>
+//   [property]: [Type],
+//   [property]: [Type],
+//   [method]: ([params]) => [ReturnType],
+//   [method]: () => [ReturnType]
 // }
-// USED IN: Navigation, ProtectedRoute, LoginPage
+// USED IN: [Components/Pages that use this]
 ```
 
-### /src/frontend/hooks/useApi.ts
+### [Path to your hook file]
 
-```typescript
-useApi<T>(endpoint: string, options?: UseApiOptions): UseApiResult<T>
-// Generic hook for API calls with loading/error states
-// FEATURES: Automatic retry, cancellation, caching
-// RETURNS: { data: T, isLoading, error, refetch }
-// USED IN: All data-fetching components
-// EXAMPLE: const { data: users } = useApi('/api/users')
+```[language]
+[hookName]<[GenericType]>([params], [params]?): [ReturnType]
+// [Description of what the hook does]
+// FEATURES: [Features provided]
+// RETURNS: { [property]: [Type], [property]: [Type], [property]: [Type] }
+// USED IN: [Where it's used]
+// EXAMPLE: [usage example]
 ```
 
-### /src/frontend/hooks/useDebounce.ts
+### [Path to your hook file]
 
-```typescript
-useDebounce<T>(value: T, delay: number = 500): T
-// Debounces rapidly changing values
-// USED IN: Search inputs, form validation
-// PREVENTS: Excessive API calls
+```[language]
+[hookName]<[GenericType]>([params], [params] = [default]): [ReturnType]
+// [Description of what the hook does]
+// USED IN: [Where it's used]
+// PREVENTS: [What it prevents]
 ```
 
 ## 🏗️ Components
 
-### /src/frontend/components/forms/FormField.tsx
+### [Path to your component file]
 
-```typescript
-interface FormFieldProps {
-  name: string
-  label: string
-  type?: 'text' | 'email' | 'password' | 'select' | 'textarea'
-  validation?: ValidationRule[]
-  required?: boolean
+```[language]
+interface [ComponentName]Props {
+  [propName]: [Type]
+  [propName]: [Type]
+  [propName]?: [Type]
+  [propName]?: [Type]
 }
 
-FormField: React.FC<FormFieldProps>
-// Reusable form field with validation
-// INTEGRATES: react-hook-form
-// SHOWS: Error messages, loading states
-// USED IN: All forms throughout the app
+[ComponentName]: [Framework].[ComponentType]<[ComponentName]Props>
+// [Description of what the component does]
+// INTEGRATES: [Libraries/frameworks integrated]
+// SHOWS: [What it displays]
+// USED IN: [Where it's used]
 ```
 
-### /src/frontend/components/ui/Button.tsx
+### [Path to your component file]
 
-```typescript
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'danger'
-  size?: 'sm' | 'md' | 'lg'
-  isLoading?: boolean
-  disabled?: boolean
-  onClick?: () => void | Promise<void>
+```[language]
+interface [ComponentName]Props {
+  [propName]?: '[value]' | '[value]' | '[value]'
+  [propName]?: '[value]' | '[value]' | '[value]'
+  [propName]?: [Type]
+  [propName]?: [Type]
+  [propName]?: () => [ReturnType] | Promise<[ReturnType]>
 }
 
-Button: React.FC<ButtonProps>
-// Consistent button styling and behavior
-// HANDLES: Loading states, async operations
-// PREVENTS: Double-clicks during async
-// ACCESSIBILITY: ARIA labels, keyboard nav
+[ComponentName]: [Framework].[ComponentType]<[ComponentName]Props>
+// [Description of what the component does]
+// HANDLES: [What it handles]
+// PREVENTS: [What it prevents]
+// ACCESSIBILITY: [Accessibility features]
 ```
 
 ## 🔌 API Endpoints
 
-### Authentication
+### [Resource Category]
 ```
-POST   /api/auth/login      -> AuthController.login()
-POST   /api/auth/register   -> AuthController.register()  
-POST   /api/auth/logout     -> AuthController.logout()
-POST   /api/auth/refresh    -> AuthController.refresh()
-GET    /api/auth/me         -> AuthController.getCurrentUser()
+[METHOD]   /api/[resource]/[action]      -> [Controller].[method]()
+[METHOD]   /api/[resource]/[action]     -> [Controller].[method]()  
+[METHOD]   /api/[resource]/[action]      -> [Controller].[method]()
+[METHOD]   /api/[resource]/[action]      -> [Controller].[method]()
+[METHOD]   /api/[resource]/[action]      -> [Controller].[method]()
 ```
 
-### Users
+### [Resource Category]
 ```
-GET    /api/users           -> UserController.list()
-GET    /api/users/:id       -> UserController.getById()
-PATCH  /api/users/:id       -> UserController.update()
-DELETE /api/users/:id       -> UserController.delete()
+[METHOD]   /api/[resource]              -> [Controller].[method]()
+[METHOD]   /api/[resource]/:id           -> [Controller].[method]()
+[METHOD]   /api/[resource]/:id            -> [Controller].[method]()
+[METHOD]   /api/[resource]/:id           -> [Controller].[method]()
 ```
 
 ## 📝 Type Definitions
 
-### /src/shared/types/user.ts
-```typescript
-interface User {
-  id: string
-  email: string
-  name: string
-  role: UserRole
-  createdAt: Date
-  updatedAt: Date
+### [Path to your types file]
+```[language]
+interface [TypeName] {
+  id: [Type]
+  [fieldName]: [Type]
+  [fieldName]: [Type]
+  [fieldName]: [Type]
+  createdAt: [DateType]
+  updatedAt: [DateType]
 }
 
-enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
-  MODERATOR = 'moderator'
+enum [EnumName] {
+  [VALUE] = '[value]',
+  [VALUE] = '[value]',
+  [VALUE] = '[value]'
 }
 
-type CreateUserDto = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
-type UpdateUserDto = Partial<CreateUserDto>
+type [TypeName] = Omit<[BaseType], '[field]' | '[field]' | '[field]'>
+type [TypeName] = Partial<[BaseType]>
 ```
 
 ## 🚨 Important Notes
@@ -260,10 +256,10 @@ type UpdateUserDto = Partial<CreateUserDto>
 
 ## 📊 Code Metrics
 
-- Total Utility Functions: [COUNT]
-- Total Service Methods: [COUNT]
-- Total React Hooks: [COUNT]
-- Total API Endpoints: [COUNT]
-- Test Coverage: [PERCENTAGE]%
+- Total Utility Functions: [COUNT - update as you add functions]
+- Total Service Methods: [COUNT - update as you add methods]
+- Total [Framework] Hooks: [COUNT - update as you add hooks]
+- Total API Endpoints: [COUNT - update as you add endpoints]
+- Test Coverage: [PERCENTAGE]% - [update with actual coverage]
 
-Last Updated: [DATE]
+Last Updated: [DATE - update when you modify this registry]

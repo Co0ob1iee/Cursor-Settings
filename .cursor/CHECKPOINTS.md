@@ -27,52 +27,52 @@ git push origin checkpoint-v[X.Y]
 
 ## CHECKPOINT LOG
 
-### CHECKPOINT v1.0 (2024-01-01)
-- ✅ Initial project setup
-- ✅ Basic folder structure
-- ✅ Development environment configured
-- ✅ Linting and formatting setup
-- 💾 Commit: initial-setup-123abc
+### CHECKPOINT v1.0 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- 💾 Commit: [commit-hash]
 
-### CHECKPOINT v1.1 (2024-01-05)
-- ✅ Database schema created
-- ✅ Prisma ORM configured
-- ✅ Basic migrations run
-- ✅ Seed data scripts
-- 💾 Commit: database-setup-456def
+### CHECKPOINT v1.1 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- 💾 Commit: [commit-hash]
 
-### CHECKPOINT v1.2 (2024-01-10)
-- ✅ User authentication implemented
-- ✅ JWT token generation
-- ✅ Login/Register endpoints
-- ✅ Password hashing with bcrypt
-- ✅ Auth middleware
-- ⚠️ Known issue: Refresh token not implemented yet
-- 💾 Commit: auth-basic-789ghi
+### CHECKPOINT v1.2 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ⚠️ Known issue: [description of known issue]
+- 💾 Commit: [commit-hash]
 
-### CHECKPOINT v1.3 (2024-01-15)
-- ✅ User CRUD operations
-- ✅ Role-based access control
-- ✅ User profile endpoints
-- ✅ Input validation
-- ✅ Error handling standardized
-- 💾 Commit: user-crud-012jkl
+### CHECKPOINT v1.3 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- 💾 Commit: [commit-hash]
 
-### CHECKPOINT v2.0 (2024-01-20)
-- ✅ Frontend scaffolding with React
-- ✅ Routing configured
-- ✅ Auth context and hooks
-- ✅ Login/Register pages
-- ✅ Protected routes
-- 💾 Commit: frontend-basic-345mno
+### CHECKPOINT v2.0 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- 💾 Commit: [commit-hash]
 
-### CHECKPOINT v2.1 (2024-01-25)
-- ✅ API client with axios
-- ✅ Request/Response interceptors
-- ✅ Auto token refresh
-- ✅ Error boundary components
-- ✅ Loading states
-- 💾 Commit: api-integration-678pqr
+### CHECKPOINT v2.1 ([DATE])
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- ✅ [Feature/Component completed]
+- 💾 Commit: [commit-hash]
 
 ---
 
@@ -169,10 +169,10 @@ npm run db:seed
 
 ## Metrics
 
-- Total Checkpoints: 6
-- Average Days Between Checkpoints: 5
-- Rollbacks Performed: 0
-- Current Stability Score: 100%
+- Total Checkpoints: [COUNT - update as you create checkpoints]
+- Average Days Between Checkpoints: [NUMBER - calculate from your checkpoints]
+- Rollbacks Performed: [COUNT - track when you rollback]
+- Current Stability Score: [PERCENTAGE]% - [assess project stability]
 
 ---
 

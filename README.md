@@ -137,6 +137,12 @@ MIT License — use it freely.
 Built for use with **Cursor AI**, the AI-powered code editor.
 
 ---
+⭐ Support & Star the Project
+
+If you enjoy this project, leave a star — it helps the project grow and reach more people.
+And if you'd like to support my work directly, you can do so here 👇
+
+<p align="center"> <a href="https://github.com/Co0ob1iee" target="_blank"> <img src="https://img.shields.io/badge/Star%20this%20Project-181717?style=for-the-badge&logo=github&logoColor=white" alt="Star the project"/> </a> &nbsp;&nbsp; <a href="https://patreon.com/Co0ob1iee" target="_blank"> <img src="https://img.shields.io/badge/Support%20on%20Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon"/> </a> &nbsp;&nbsp; <a href="https://buymeacoffee.com/Co0ob1iee" target="_blank"> <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"/> </a> </p>
 
 ## ❤️ Support My Work
 

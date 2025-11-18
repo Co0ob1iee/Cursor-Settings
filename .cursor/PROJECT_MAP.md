@@ -10,153 +10,162 @@
 
 ## 📦 Module Dependencies
 
-### Frontend (/src/frontend)
+### Frontend ([Your Frontend Path])
 
 #### Components
 ```
-- App.tsx
-  - USES: `Router` from 'react-router-dom'
-  - USES: `AuthProvider` from '/contexts/AuthContext'
-  - USES: `ThemeProvider` from '/contexts/ThemeContext'
+[Example structure - customize for your project]
+- App.[ext]
+  - USES: `[Router Library]` from '[package]'
+  - USES: `[AuthProvider]` from '/contexts/[AuthContext]'
+  - USES: `[ThemeProvider]` from '/contexts/[ThemeContext]'
   - CHILDREN: All page components
 
-- LoginPage.tsx
-  - USES: `useAuth` from '/hooks/useAuth'
-  - USES: `apiClient.login()` from '/api/client'
-  - USES: `Button, Input` from '/components/ui'
-  - EMITS: onLoginSuccess
-  - REDIRECTS: to /dashboard on success
+- [PageComponent].[ext]
+  - USES: `[CustomHook]` from '/hooks/[hookName]'
+  - USES: `[ApiClient].[method]()` from '/api/[client]'
+  - USES: `[UI Components]` from '/components/ui'
+  - EMITS: [eventName]
+  - REDIRECTS: to [route] on success
 ```
 
-#### Hooks
+#### Hooks/Utilities
 ```
-- useAuth.ts
-  - USES: `AuthContext` from '/contexts/AuthContext'
-  - USES: `apiClient` from '/api/client'
-  - PROVIDES: user, login(), logout(), isAuthenticated
-  - STORAGE: localStorage for token
+[Example structure - customize for your project]
+- [hookName].[ext]
+  - USES: `[Context]` from '/contexts/[ContextName]'
+  - USES: `[ApiClient]` from '/api/[client]'
+  - PROVIDES: [returned values/functions]
+  - STORAGE: [storage mechanism] for [data]
 ```
 
 #### API Client
 ```
-- /api/client.ts
-  - USES: `axios` for HTTP requests
-  - USES: `authToken` from localStorage
-  - IMPLEMENTS: interceptors for auth
-  - EXPORTS: apiClient instance with methods
+[Example structure - customize for your project]
+- /api/[client].[ext]
+  - USES: `[HTTP Library]` for HTTP requests
+  - USES: `[AuthToken]` from [storage]
+  - IMPLEMENTS: [interceptors/middleware] for [purpose]
+  - EXPORTS: [exported instance/methods]
 ```
 
-### Backend (/src/backend)
+### Backend ([Your Backend Path])
 
 #### API Routes
 ```
-- /api/auth/login (POST)
-  - HANDLER: AuthController.login
-  - VALIDATES: email, password
-  - CALLS: AuthService.authenticate()
-  - RETURNS: { token, user }
-  - ERRORS: 401 Unauthorized, 400 Bad Request
+[Example structure - customize for your project]
+- /api/[resource]/[action] ([METHOD])
+  - HANDLER: [Controller].[method]
+  - VALIDATES: [validation rules]
+  - CALLS: [Service].[method]()
+  - RETURNS: [return type]
+  - ERRORS: [error codes and types]
 
-- /api/users (GET)
-  - MIDDLEWARE: authMiddleware
-  - HANDLER: UserController.list
-  - CALLS: UserService.findAll()
-  - RETURNS: User[]
-  - CACHE: Redis key 'users:all' (5 min)
+- /api/[resource] ([METHOD])
+  - MIDDLEWARE: [middleware name]
+  - HANDLER: [Controller].[method]
+  - CALLS: [Service].[method]()
+  - RETURNS: [return type]
+  - CACHE: [caching strategy] (if applicable)
 ```
 
 #### Services
 ```
-- AuthService
+[Example structure - customize for your project]
+- [ServiceName]
   - METHODS:
-    - authenticate(email, password): Promise<AuthResult>
-      - CALLS: UserService.findByEmail()
-      - CALLS: bcrypt.compare()
-      - CALLS: TokenService.generate()
-    - validateToken(token): Promise<User>
-      - CALLS: jwt.verify()
-      - CALLS: UserService.findById()
+    - [methodName]([params]): [ReturnType]
+      - CALLS: [OtherService].[method]()
+      - CALLS: [Library].[function]()
+      - CALLS: [Service].[method]()
+    - [methodName]([params]): [ReturnType]
+      - CALLS: [Library].[function]()
+      - CALLS: [Service].[method]()
 
-- UserService  
-  - DEPENDENCIES: prisma (database)
+- [ServiceName]  
+  - DEPENDENCIES: [dependency] ([purpose])
   - METHODS:
-    - findAll(filters?): Promise<User[]>
-    - findById(id): Promise<User>
-    - create(data): Promise<User>
-    - update(id, data): Promise<User>
+    - [methodName]([params]?): [ReturnType]
+    - [methodName]([params]): [ReturnType]
+    - [methodName]([params]): [ReturnType]
+    - [methodName]([params], [params]): [ReturnType]
 ```
 
 #### Middleware
 ```
-- authMiddleware
-  - USES: `AuthService.validateToken()`
-  - SETS: req.user
-  - ERRORS: 401 if invalid token
+[Example structure - customize for your project]
+- [middlewareName]
+  - USES: `[Service].[method]()`
+  - SETS: [request property]
+  - ERRORS: [error conditions]
 
-- errorHandler
-  - CATCHES: all errors
-  - LOGS: to monitoring service
-  - RETURNS: formatted error response
+- [middlewareName]
+  - CATCHES: [error types]
+  - LOGS: to [logging destination]
+  - RETURNS: [formatted response]
 ```
 
 ### Database Schema
 ```
-- User
-  - id: UUID (PRIMARY KEY)
-  - email: STRING (UNIQUE)
-  - password: STRING (HASHED)
-  - createdAt: DATETIME
-  - updatedAt: DATETIME
+[Example structure - customize for your project]
+- [EntityName]
+  - id: [ID Type] (PRIMARY KEY)
+  - [fieldName]: [Type] ([CONSTRAINTS])
+  - [fieldName]: [Type] ([CONSTRAINTS])
+  - createdAt: [DateTime Type]
+  - updatedAt: [DateTime Type]
   - RELATIONS:
-    - hasMany: Posts
-    - hasMany: Comments
+    - [relationType]: [RelatedEntity]
 
-- Post  
-  - id: UUID (PRIMARY KEY)
-  - userId: UUID (FOREIGN KEY)
-  - title: STRING
-  - content: TEXT
+- [EntityName]  
+  - id: [ID Type] (PRIMARY KEY)
+  - [foreignKeyField]: [ID Type] (FOREIGN KEY)
+  - [fieldName]: [Type]
+  - [fieldName]: [Type]
   - RELATIONS:
-    - belongsTo: User
-    - hasMany: Comments
+    - [relationType]: [RelatedEntity]
+    - [relationType]: [RelatedEntity]
 ```
 
-### Shared Types (/src/shared/types)
+### Shared Types ([Your Shared Types Path])
 ```
-- User.ts
-  - Interface used by both frontend and backend
-  - Validation schemas (zod)
+[Example structure - customize for your project]
+- [TypeName].[ext]
+  - Interface/Type used by both frontend and backend
+  - Validation schemas ([validation library])
 
-- ApiResponse.ts  
+- [TypeName].[ext]  
   - Standard response format
   - Error response format
 ```
 
 ## 🔄 Data Flow Examples
 
-### Login Flow
+### [Example Flow Name]
 ```
-1. LoginPage.tsx captures credentials
-2. Calls apiClient.login(email, password)
-3. API POST /auth/login
-4. AuthController validates input
-5. AuthService.authenticate() checks credentials
-6. TokenService generates JWT
+[Example flow - customize for your project]
+1. [Component/Module] [action]
+2. Calls [API Client].[method]([params])
+3. API [METHOD] /[endpoint]
+4. [Controller] validates [input]
+5. [Service].[method]() [action description]
+6. [Service/Library] [action description]
 7. Response sent to frontend
-8. Token stored in localStorage
-9. AuthContext updated with user
-10. Redirect to dashboard
+8. [Data] stored in [storage]
+9. [Context/State] updated with [data]
+10. Redirect to [route] / [action]
 ```
 
-### Data Fetch Flow (Authenticated)
+### [Example Flow Name] (Authenticated)
 ```
-1. Component calls custom hook
-2. Hook uses apiClient with auth token
-3. authMiddleware validates token
-4. Service fetches from database
-5. Data potentially cached in Redis
+[Example flow - customize for your project]
+1. [Component] calls [hook/function]
+2. [Hook/Function] uses [API Client] with [auth mechanism]
+3. [Middleware] validates [token/credentials]
+4. [Service] fetches from [data source]
+5. Data potentially cached in [cache solution]
 6. Response formatted and sent
-7. Frontend updates state
+7. Frontend updates [state/context]
 ```
 
 ## 🚨 Critical Dependencies

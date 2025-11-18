@@ -13,12 +13,13 @@ Use it as the single source of truth for large teams and long-running projects.
 
 ### Architecture Overview
 
-- Frontend: React + TypeScript + Tailwind
-- Backend: Node.js + Express + PostgreSQL
-- ORM: Prisma
-- Auth: JWT + refresh tokens
-- State Management: Redux Toolkit
-- Infrastructure: Docker, Kubernetes (optional), Terraform for IaC
+- Frontend: [Technology Stack] (e.g., React + TypeScript, Vue.js, Angular, etc.)
+- Backend: [Technology Stack] (e.g., Node.js + Express, Python + FastAPI, .NET, etc.)
+- Database: [Database Type] (e.g., PostgreSQL, MongoDB, MySQL, etc.)
+- ORM/ODM: [ORM Tool] (e.g., Prisma, TypeORM, Mongoose, etc.)
+- Auth: [Authentication Method] (e.g., JWT + refresh tokens, OAuth2, etc.)
+- State Management: [State Management] (e.g., Redux Toolkit, Zustand, Pinia, etc.)
+- Infrastructure: [Infrastructure Tools] (e.g., Docker, Kubernetes, Terraform, etc.)
 
 ### Compliance & Governance
 
@@ -46,6 +47,8 @@ Use `git tag checkpoint-vX.Y` for stable milestones.
 ### Code Structure (suggested)
 
 ```
+[Customize based on your project structure]
+Example:
 /src
   /apps
     /web (frontend)
@@ -56,6 +59,14 @@ Use `git tag checkpoint-vX.Y` for stable milestones.
   /infra
     /terraform
     /k8s
+
+Or:
+/app
+  /client
+  /server
+  /shared
+
+[Document your actual structure here]
 ```
 
 ### Key Decisions
@@ -88,11 +99,11 @@ Use `git tag checkpoint-vX.Y` for stable milestones.
 
 4. **Pre-flight Checklist** (enforced in CI):
 
-   - TypeScript strict mode
-   - Linting (ESLint)
-   - Format (Prettier)
+   - [Language] strict mode (e.g., TypeScript strict mode, Python type checking)
+   - Linting ([Linter Name], e.g., ESLint, Pylint, RuboCop)
+   - Format ([Formatter Name], e.g., Prettier, Black, gofmt)
    - Unit & Integration tests
-   - Security scans
+   - Security scans (Snyk/Dependabot/Safety)
    - Dependency updates policy
 
 5. **Release & Branching**:

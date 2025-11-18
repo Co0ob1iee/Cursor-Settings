@@ -140,10 +140,4 @@ Built for use with **Cursor AI**, the AI-powered code editor.
 
 ## ❤️ Support My Work
 
-### Patreon
-
-![Patreon](https://patreon.com/Co0ob1iee)
-
-### Buy Me a Coffee
-
-![BuyMeACoffee](https://buymeacoffee.com/Co0ob1iee)
+<p align="center"> <a href="https://patreon.com/Co0ob1iee" target="_blank"> <img src="https://img.shields.io/badge/Support%20on%20Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon"/> </a> &nbsp;&nbsp; <a href="https://buymeacoffee.com/Co0ob1iee" target="_blank"> <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"/> </a> </p>

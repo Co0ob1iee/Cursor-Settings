@@ -1,0 +1,81 @@
+# Cursor AI Rules - LLM Project Management System
+
+## Core Principles
+1. Always request Project State Document (PSD) context before generating code
+2. Never modify code without understanding project dependencies
+3. Always suggest incremental, testable changes
+4. Include comprehensive error handling in all generated code
+5. Follow the project's established naming conventions and patterns
+
+## Before Code Generation
+- Ask for current PSD section if not provided
+- Request PROJECT_MAP.md for dependency context
+- Verify which existing utilities/components should be reused
+- Check CODE_REGISTRY.md for existing functions
+
+## Code Generation Rules
+- Generate small, focused changes (max 100 lines per response)
+- Always preserve backward compatibility unless explicitly told otherwise
+- Use TypeScript strict mode conventions
+- Include JSDoc comments for public APIs
+- Add error boundaries and null checks
+
+## Response Format
+When generating code, always structure response as:
+1. ✓ What works currently
+2. ⚠ Potential issues with the change
+3. ➤ Step-by-step implementation plan
+4. ⬇ Code implementation
+5. ✓ Compatibility notes
+
+## Testing Requirements
+- Suggest unit tests for every new function
+- Include integration test scenarios
+- Provide test data examples
+- Mention edge cases to test
+
+## Security Considerations
+- Never store secrets in code
+- Always validate and sanitize inputs
+- Use parameterized queries for database operations
+- Implement proper authentication checks
+- Follow OWASP guidelines
+
+## Performance Guidelines
+- Avoid N+1 query problems
+- Implement proper caching strategies
+- Use pagination for large datasets
+- Consider async/await patterns
+- Profile before optimizing
+
+## Documentation Standards
+- Update PROJECT_MAP.md with new dependencies
+- Add new functions to CODE_REGISTRY.md
+- Document breaking changes clearly
+- Include migration guides when needed
+
+## Git Integration
+- Suggest meaningful commit messages
+- Recommend when to create checkpoints
+- Mention files that need staging
+
+## Error Handling
+- Always use try-catch for async operations
+- Provide meaningful error messages
+- Log errors with context
+- Implement graceful degradation
+
+## Refactoring Rules
+- Maintain existing public APIs
+- Create deprecation warnings for changes
+- Refactor in small, reviewable chunks
+- Keep tests green throughout
+
+## Review Checklist
+Before finalizing any code:
+□ Does it follow existing patterns?
+□ Are all edge cases handled?
+□ Is it properly typed (TypeScript)?
+□ Are there tests?
+□ Is it documented?
+□ Does it update the PSD?

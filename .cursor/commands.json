@@ -1,0 +1,30 @@
+{
+  "commands": [
+    {
+      "name": "Update Project Docs",
+      "description": "Automatically update LLM project documentation",
+      "prompt": "Based on the recent changes in the git diff, update the following project documentation files:\n\n1. .cursor/MASTER.md - Update 'Completed Features' and 'In Progress' sections\n2. .cursor/PROJECT_MAP.md - Add any new dependencies, components, or API endpoints\n3. .cursor/CODE_REGISTRY.md - Document new functions, classes, or hooks\n\nHere's the current git diff:\n```\n${git:diff}\n```\n\nProvide the updates in clear sections for each file. Only include what needs to be added or changed.",
+      "context": [
+        ".cursor/MASTER.md",
+        ".cursor/PROJECT_MAP.md", 
+        ".cursor/CODE_REGISTRY.md"
+      ]
+    },
+    {
+      "name": "Document This File",
+      "description": "Add current file to CODE_REGISTRY",
+      "prompt": "Add documentation for this file to .cursor/CODE_REGISTRY.md:\n\nFile: ${file:path}\n\nContent:\n```\n${file:content}\n```\n\nGenerate CODE_REGISTRY.md entries for all exported functions, classes, and important constants. Follow the existing format in .cursor/CODE_REGISTRY.md.",
+      "context": [
+        ".cursor/CODE_REGISTRY.md"
+      ]
+    },
+    {
+      "name": "Create Checkpoint",
+      "description": "Create a new checkpoint entry",
+      "prompt": "Create a checkpoint entry for .cursor/CHECKPOINTS.md:\n\nRecent commits:\n```\n${git:log:5}\n```\n\nCurrent status:\n- Tests passing: YES\n- Build status: SUCCESS\n\nGenerate a checkpoint entry with:\n- Version number (increment from last)\n- Summary of changes\n- Current date\n- Latest commit hash",
+      "context": [
+        ".cursor/CHECKPOINTS.md"
+      ]
+    }
+  ]
+}
